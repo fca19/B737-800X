@@ -1,0 +1,4186 @@
+A
+1000
+ACF_SOUNDS
+
+#############################################################################################################
+#                                            (C) 2017 by audiobirdxp / o. schmidt                           #
+#                                            audiobirdxp@gmail.com                                          #
+#############################################################################################################
+#############################################################################################################
+#                                                    V1 ZIBO'S MODIFIED )                                   #
+#                                                    06-07-17  /  22:00                                     #
+#############################################################################################################
+
+#version=V1.0
+  
+##################################
+# THE INSIDE SOUND SPACE
+##################################
+
+BEGIN_SOUND_SPACE
+	SOUND_INDEX 0
+	BLEND_DEPTH 0.0
+	AABB -1.6 0.28 -17 1.6 2 10
+END_SOUND_SPACE
+
+#############################################################################################################
+#                                                   SNAPSHOTS                                               #
+#############################################################################################################
+
+BEGIN_SOUND_ATTACHMENT
+	SNAPSHOT_NAME /muffler
+	VEH_PART cockpit 0
+	EVENT_START_COND sim/operation/sound/inside_ratio[0] >= 0.7
+	EVENT_END_COND sim/operation/sound/inside_ratio[0] < 0.7
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	SNAPSHOT_NAME /muffler_outside
+	VEH_PART cockpit 0
+	EVENT_START_COND sim/operation/sound/inside_ratio[0] < 0.7
+	EVENT_END_COND sim/operation/sound/inside_ratio[0] >= 0.7
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	SNAPSHOT_NAME /ducker
+	VEH_PART cockpit 0
+	EVENT_START_COND laminar/b738/fmodpack/fmod_vol_int_ducker == 1
+	EVENT_END_COND laminar/b738/fmodpack/fmod_vol_int_ducker == 0
+END_SOUND_ATTACHMENT
+
+#############################################################################################################
+#                                                    ENGINE INSIDE                                          #
+#############################################################################################################
+
+
+######################## LEFT ENGINE ############################# 
+
+### START / STOP
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/engines/left/dynamic_START
+	VEH_XYZ -4.2 0.42 -4.26
+	PARAM_DREF_IDX 0
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N2_[0] > 0.01
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N2_[0] < 0.01
+END_SOUND_ATTACHMENT
+
+
+### TURBINE
+### wingbox
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/engines/left/MAIN2
+	VEH_XYZ -4.2 0.42 -4.26
+	PARAM_DREF_IDX 0
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N1_[0] >= 14
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N1_[0] < 14
+END_SOUND_ATTACHMENT
+
+######################## RIGHT ENGINE ############################# 
+
+### START / STOP
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/engines/right/dynamic_START
+	VEH_XYZ -4.2 0.42 -4.26
+	PARAM_DREF_IDX 0
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N2_[1] > 0.01
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N2_[1] < 0.01
+END_SOUND_ATTACHMENT
+
+
+### TURBINE
+### wingbox
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/engines/right/MAIN2
+	VEH_XYZ -4.2 0.42 -4.26
+	PARAM_DREF_IDX 1
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N1_[1] >= 14
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N1_[1] < 14
+END_SOUND_ATTACHMENT
+
+######################## specialfx
+
+# LEFT
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/engines/full_throttle_0
+	VEH_XYZ 2 1.4 -4.26
+	PARAM_DREF_IDX 0
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N1_[0] >= 44
+	CUE_TRIGGER_COND sim/flightmodel/engine/ENGN_N1_[0] < 44
+END_SOUND_ATTACHMENT
+
+# RIGHT
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/engines/full_throttle_1
+	VEH_XYZ -2 1.4 -4.26
+	PARAM_DREF_IDX 1
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N1_[1] >= 44
+	CUE_TRIGGER_COND sim/flightmodel/engine/ENGN_N1_[1] < 44
+END_SOUND_ATTACHMENT
+
+
+# rush
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/engines/rush
+	VEH_XYZ 0 1.4 -4
+	EVENT_START_COND DELTA=sim/flightmodel/engine/ENGN_N1_[0] >= 7
+	CUE_TRIGGER_COND DELTA=sim/flightmodel/engine/ENGN_N1_[0] < 7
+END_SOUND_ATTACHMENT
+
+#############################################################################################################
+#                                                    ENGINE OUTSIDE                                         #
+#############################################################################################################
+
+######################## LEFT ENGINE ############################# 
+
+### START / STOP
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/engines/left/MAIN/dynamic_START_0
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ -4.2 0.42 -4.26
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N2_[0] > 0.01
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N2_[0] < 0.01
+END_SOUND_ATTACHMENT
+
+### TURBINE
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/engines/left/MAIN/engine_0
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ -4.2 0.42 -4.26
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N1_[0] >= 15
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N1_[0] < 15
+END_SOUND_ATTACHMENT
+
+### DISTANCE
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/engines/left/DISTANCE/engine_0_exhaust
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ -4.2 0.42 -4.26
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N1_[0] >= 15
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N1_[0] < 15
+END_SOUND_ATTACHMENT
+
+######################## RIGHT ENGINE #############################
+
+### START 
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/engines/right/MAIN/dynamic_START_1
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 4.2 0.42 -4.26
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N2_[1] > 0.01
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N2_[1] < 0.01
+END_SOUND_ATTACHMENT
+
+
+
+### TURBINE
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/engines/right/MAIN/engine_1
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 4.2 0.42 -4.26
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N1_[1] >= 15
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N1_[1] < 15
+END_SOUND_ATTACHMENT
+
+### DISTANCE
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/engines/right/DISTANCE/engine_1_exhaust
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 4.2 0.42 -4.26
+	EVENT_START_COND sim/flightmodel/engine/ENGN_N1_[1] >= 15
+	EVENT_END_COND sim/flightmodel/engine/ENGN_N1_[1] < 15
+END_SOUND_ATTACHMENT
+
+
+### OHP specialfx
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/engines/OHP_special
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 0 0 0
+	EVENT_START_COND sim/flightmodel/position/groundspeed >= 40
+	CUE_TRIGGER_COND sim/flightmodel/failures/onground_any == 1
+END_SOUND_ATTACHMENT
+
+######################## APU #############################
+
+#### APU external
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/APU/APU_start
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 0 0 15 
+	EVENT_START_COND sim/cockpit2/electrical/APU_N1_percent >= 1
+	EVENT_END_COND sim/cockpit2/electrical/APU_N1_percent < 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/APU/APU_running
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 0 0 15 
+	EVENT_START_COND sim/cockpit2/electrical/APU_N1_percent > 98
+	EVENT_END_COND sim/cockpit2/electrical/APU_N1_percent < 98
+END_SOUND_ATTACHMENT
+
+#### APU internal
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/APU/APU_start
+	VEH_XYZ 0 1.35 5 
+	EVENT_START_COND sim/cockpit2/electrical/APU_N1_percent >= 1
+	EVENT_END_COND sim/cockpit2/electrical/APU_N1_percent < 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/APU/APU_running
+	VEH_XYZ 0 1.35 5 
+	EVENT_START_COND sim/cockpit2/electrical/APU_N1_percent > 98
+	EVENT_END_COND sim/cockpit2/electrical/APU_N1_percent < 98
+END_SOUND_ATTACHMENT
+
+#############################################################################################################
+#                                                    REVERSERS                                              #
+#############################################################################################################
+
+################ OUTSIDE
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/thrust_reverser/reverse_L
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ -4.2 0.42 -4.26
+	EVENT_START_COND sim/cockpit2/annunciators/reverser_on[0] == 1
+	EVENT_END_COND sim/cockpit2/annunciators/reverser_on[0] < 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/thrust_reverser/reverse_R
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 4.2 0.42 -4.26
+	EVENT_START_COND sim/cockpit2/annunciators/reverser_on[1] == 1
+	EVENT_END_COND sim/cockpit2/annunciators/reverser_on[1] < 1
+END_SOUND_ATTACHMENT
+
+# slide open / close
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/thrust_reverser/open_close
+	VEH_XYZ -5 1 1.5 
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/annunciators/reverser_on[0] > 0
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/annunciators/reverser_on[0] == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/external/thrust_reverser/open_close
+	VEH_XYZ 5 1 1.5 
+EVENT_START_COND ABS_DELTA=sim/cockpit2/annunciators/reverser_on[1] > 0
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/annunciators/reverser_on[1] == 0
+END_SOUND_ATTACHMENT
+
+################ INSIDE
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/thrust_reverser/reverse_L
+	VEH_XYZ -4.2 0.42 -4.26
+	EVENT_START_COND sim/cockpit2/annunciators/reverser_on[0] == 1
+	CUE_TRIGGER_COND  sim/cockpit2/annunciators/reverser_on[0] < 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+EVENT_NAME /model/b737/cockpit/thrust_reverser/reverse_R
+	VEH_XYZ 4.2 0.42 -4.26 
+	EVENT_START_COND sim/cockpit2/annunciators/reverser_on[1] == 1
+	CUE_TRIGGER_COND  sim/cockpit2/annunciators/reverser_on[1] < 1
+END_SOUND_ATTACHMENT
+
+#############################################################################################################
+#                                                    ELECTRICAL SYSTEMS and AC                              #
+#############################################################################################################
+
+################################## AC / GYRO logic
+
+# custom dataref
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/busses/ac_on_chime
+	VEH_XYZ 0 1.9 -16.8
+	EVENT_START_COND DELTA=laminar/b738/fmodpack/ac_established > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/gyro_vibrator/gyro_vibrator
+	VEH_XYZ 0 1.3 -16.8
+	EVENT_START_COND laminar/b738/fmodpack/ac_established == 1
+	CUE_TRIGGER_COND laminar/b738/fmodpack/ac_established == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/gyro_vibrator/gyro_vibrator_close
+	VEH_XYZ 0 1.3 -16.8
+	EVENT_START_COND laminar/b738/fmodpack/ac_established == 1
+	CUE_TRIGGER_COND laminar/b738/fmodpack/ac_established == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/AC/avionics_cooling
+	VEH_XYZ -0.5 1.3 -14.5
+	EVENT_START_COND laminar/b738/fmodpack/ac_established == 1
+	CUE_TRIGGER_COND laminar/b738/fmodpack/ac_established == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/busses/ac_off
+	VEH_XYZ -0.5 1.3 -14.5
+	EVENT_START_COND DELTA=laminar/b738/fmodpack/ac_established < 0
+	EVENT_END_COND DELTA=laminar/b738/fmodpack/ac_established > 0
+END_SOUND_ATTACHMENT
+
+
+
+################################# BUSSES
+
+### GPU bus on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/busses/relay
+	VEH_XYZ -0.5 1.3 -14.5
+	EVENT_START_COND sim/cockpit/electrical/gpu_on == 1
+END_SOUND_ATTACHMENT
+
+### APU BUS ON
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/busses/APU_bus_on
+	VEH_XYZ -0.5 1.3 -15.5
+	EVENT_START_COND sim/cockpit/electrical/generator_apu_amps > 0.1
+END_SOUND_ATTACHMENT
+
+### GEN BUSSES ON
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/busses/switch_bus_relay1
+	VEH_XYZ -0.5 1.3 -15.5
+	EVENT_START_COND DELTA=sim/cockpit2/annunciators/generator_off[0] < 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/busses/switch_bus_relay2
+	VEH_XYZ -0.5 1.3 -15.5
+	EVENT_START_COND DELTA=sim/cockpit2/annunciators/generator_off[1] < 0
+END_SOUND_ATTACHMENT
+
+
+
+################################# BLEED AIR & PACKS & RECIRCULATED AIR
+
+################################# dynamic PACKS
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/AC/PACKS_L
+	VEH_XYZ -1 1.9 -16
+	EVENT_START_COND laminar/b738/fmodpack/packs_L > 0
+	CUE_TRIGGER_COND laminar/b738/fmodpack/packs_L == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/AC/PACKS_R
+	VEH_XYZ 1 1.9 -16
+	EVENT_START_COND laminar/b738/fmodpack/packs_R > 0
+	CUE_TRIGGER_COND laminar/b738/fmodpack/packs_R == 0
+END_SOUND_ATTACHMENT
+
+################################# dynamic RECIRCULATION
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/AC/RECIRC_L
+	VEH_XYZ -1 1.8 -16.5
+	EVENT_START_COND laminar/B738/air/l_recirc_fan_pos == 1
+	CUE_TRIGGER_COND laminar/B738/air/l_recirc_fan_pos == 0
+END_SOUND_ATTACHMENT
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/AC/RECIRC_R
+	VEH_XYZ 1.5 1.8 -16.5
+	EVENT_START_COND laminar/B738/air/r_recirc_fan_pos == 1
+	CUE_TRIGGER_COND laminar/B738/air/r_recirc_fan_pos == 0
+END_SOUND_ATTACHMENT
+
+################################# dynamic EQUIPMENT COOLING
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/AC/equipment_cooling
+	VEH_XYZ 0 1.4 -16.7
+	EVENT_START_COND sim/cockpit2/electrical/bus_load_amps[0] > 0
+	CUE_TRIGGER_COND sim/cockpit2/electrical/bus_load_amps[0] == 0
+END_SOUND_ATTACHMENT
+
+# cooling is activated once GPU is connected (available) | cooling event terminated once power is established and event triggered through bus load amps
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/AC/equipment_cooling
+	VEH_XYZ 0 1.4 -16.7
+	EVENT_START_COND laminar/B738/annunciator/ground_power_avail > 0
+	EVENT_END_COND sim/cockpit2/electrical/bus_load_amps[0] > 0
+END_SOUND_ATTACHMENT
+
+
+#### external
+
+# /model/b737/external/bleed_air/bleed_air
+
+## left
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/bleed_air/bleed_air_L
+	VEH_XYZ -5 1 0
+	EVENT_START_COND laminar/B738/toggle_switch/bleed_air_1_pos > 0
+	EVENT_END_COND laminar/B738/toggle_switch/bleed_air_1_pos <= 0
+END_SOUND_ATTACHMENT
+
+## right
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/bleed_air/bleed_air_R
+	VEH_XYZ 5 1 0
+	EVENT_START_COND laminar/B738/toggle_switch/bleed_air_2_pos > 0
+	EVENT_END_COND laminar/B738/toggle_switch/bleed_air_2_pos <= 0
+END_SOUND_ATTACHMENT
+
+
+################################# BATTERY NOISE
+
+
+## change from volts
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/bat_online
+	VEH_XYZ 0 1.5 -16
+	EVENT_START_COND sim/cockpit2/electrical/battery_on[0] != 0
+	EVENT_END_COND sim/cockpit2/electrical/bus_load_amps[0] == 0
+END_SOUND_ATTACHMENT
+
+#############################################################################################################
+#                                                   HYDRAULICS                                              #
+#############################################################################################################
+
+############### HYDRAULICS SYSTEMS NOISE
+
+### cockpit
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/hydraulics/hydraulics_cockpit
+	VEH_XYZ 0 1.5 -16
+	EVENT_START_COND sim/cockpit2/hydraulics/indicators/hydraulic_pressure_1 >= 2200
+	CUE_TRIGGER_COND sim/cockpit2/hydraulics/indicators/hydraulic_pressure_1 < 2200
+END_SOUND_ATTACHMENT
+
+### wingbox inside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/hydraulics/hydraulics_wingbox
+	VEH_XYZ 0 0 -1.5
+EVENT_START_COND sim/cockpit2/hydraulics/indicators/hydraulic_pressure_1 >= 2200
+	CUE_TRIGGER_COND sim/cockpit2/hydraulics/indicators/hydraulic_pressure_1 < 2200
+END_SOUND_ATTACHMENT
+
+### wheelwell outside R
+BEGIN_SOUND_ATTACHMENT
+	EVENT_ALLOWED_FOR_AI
+	EVENT_NAME /model/b737/external/hydraulics/hydraulics
+	VEH_XYZ 2.2 -1.5 0
+	EVENT_START_COND sim/cockpit2/hydraulics/indicators/hydraulic_pressure_1 >= 2200
+	CUE_TRIGGER_COND sim/cockpit2/hydraulics/indicators/hydraulic_pressure_1 < 2200
+END_SOUND_ATTACHMENT
+
+### wheelwell outside L
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/hydraulics/hydraulics
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ -2.2 -1.5 0
+	EVENT_START_COND sim/cockpit2/hydraulics/indicators/hydraulic_pressure_1 >= 2200
+	CUE_TRIGGER_COND sim/cockpit2/hydraulics/indicators/hydraulic_pressure_1 < 2200
+END_SOUND_ATTACHMENT
+
+############### HYDRAULICS SYSTEMS: FLAPS
+
+### FLAPS LEVER
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/flaps_lever
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND DELTA=sim/flightmodel/controls/flaprqst > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/flaps_lever_up
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND DELTA=sim/flightmodel/controls/flaprqst < 0
+END_SOUND_ATTACHMENT
+
+### FLAPS inside
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/hydraulics/flaps/flaps_moving
+	VEH_XYZ 0 0 0
+	EVENT_START_COND ABS_DELTA=sim/flightmodel2/wing/flap1_deg[0] != 0
+	CUE_TRIGGER_COND ABS_DELTA=sim/flightmodel2/wing/flap1_deg[0] == 0
+END_SOUND_ATTACHMENT
+
+
+### FLAPS outside
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/hydraulics/flaps/flaps_moving
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 0 0 0
+	EVENT_START_COND ABS_DELTA=sim/flightmodel2/wing/flap1_deg[0] != 0
+	EVENT_END_COND ABS_DELTA=sim/flightmodel2/wing/flap1_deg[0] == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/hydraulics/flaps/flaps_motor
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 0 0 0
+	EVENT_START_COND ABS_DELTA=sim/flightmodel2/wing/flap1_deg[0] != 0
+	EVENT_END_COND ABS_DELTA=sim/flightmodel2/wing/flap1_deg[0] == 0
+END_SOUND_ATTACHMENT
+
+#### FLAPS wind NOISE (internal)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/wind/flaps_wind
+	VEH_XYZ 0 1.25 -2
+	EVENT_START_COND sim/flightmodel2/wing/flap1_deg[0] > 0
+	CUE_TRIGGER_COND sim/flightmodel2/wing/flap1_deg[0] == 0
+END_SOUND_ATTACHMENT
+
+############### HYDRAULICS SYSTEMS: SPOILERS
+
+#### SPOILER WIND NOISE
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/wind/spoiler_extended
+	VEH_XYZ 0 1.25 -2
+	EVENT_START_COND sim/flightmodel2/wing/spoiler2_deg[0] > 0
+	CUE_TRIGGER_COND sim/flightmodel2/wing/spoiler2_deg[0] == 0
+END_SOUND_ATTACHMENT
+
+#############################################################################################################
+#                                                   GROUND IMPACT                                           #
+#############################################################################################################
+
+#### LANDING IMPACT
+
+### in flight mode
+
+# TIRES CONTACT
+
+### NOSE WHEEL
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/dynamic_impact/impact_nose
+	VEH_XYZ 0 1.25 -15.5
+	EVENT_START_COND ABS_DELTA=sim/flightmodel2/gear/tire_vertical_deflection_mtr[0] >= 1
+END_SOUND_ATTACHMENT
+
+### NOSE WHEEL
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/dynamic_impact/impact_dashboard
+	VEH_XYZ 0 1.25 -15.5
+	EVENT_START_COND ABS_DELTA=sim/flightmodel2/gear/tire_vertical_deflection_mtr[0] >= 1
+END_SOUND_ATTACHMENT
+
+# REAR WHEELS
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/dynamic_impact/impact_mains
+	VEH_XYZ -4 1.25 -2
+	EVENT_START_COND ABS_DELTA=sim/flightmodel2/gear/tire_vertical_deflection_mtr[1] >= 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/dynamic_impact/impact_mains
+	VEH_XYZ 4 1.25 -2
+	EVENT_START_COND ABS_DELTA=sim/flightmodel2/gear/tire_vertical_deflection_mtr[2] >= 1
+END_SOUND_ATTACHMENT
+
+### in replay mode
+
+### NOSE WHEEL
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/dynamic_impact/impact_nose_replay
+	VEH_XYZ 0 1.25 -15.5
+	EVENT_START_COND sim/flightmodel/failures/onground_all == 1
+END_SOUND_ATTACHMENT
+
+### NOSE WHEEL
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/dynamic_impact/impact_dashboard_replay
+	VEH_XYZ 0 1.25 -15.5
+	EVENT_START_COND sim/flightmodel/failures/onground_all == 1
+END_SOUND_ATTACHMENT
+
+# REAR WHEELS
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/dynamic_impact/impact_mains_replay
+	VEH_XYZ -4 1.25 -2
+	EVENT_START_COND sim/flightmodel/failures/onground_any > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/dynamic_impact/impact_mains_replay
+	VEH_XYZ 4 1.25 -2
+	EVENT_START_COND sim/flightmodel/failures/onground_any > 0
+END_SOUND_ATTACHMENT
+
+
+# Lift off
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/landing_gear/liftoff
+	VEH_XYZ 0 1.25 -15.5
+	EVENT_START_COND sim/flightmodel/failures/onground_any == 0
+	EVENT_END_COND sim/flightmodel/failures/onground_any == 1
+	END_SOUND_ATTACHMENT
+
+#############################################################################################################
+#                                                     TRIM WHEEL                                            #
+#############################################################################################################
+
+# manual / AP fast
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/trimwheel/manual_fast
+	VEH_XYZ 0 1.25 -15.3
+	EVENT_START_COND ABS_DELTA=sim/flightmodel2/controls/stabilizer_deflection_degrees >= 0.5
+	CUE_TRIGGER_COND ABS_DELTA=sim/flightmodel2/controls/stabilizer_deflection_degrees < 0.5
+END_SOUND_ATTACHMENT
+
+ manual / AP
+#BEGIN_SOUND_ATTACHMENT
+	#EVENT_NAME /model/b737/cockpit/trimwheel/manual_slow
+	#VEH_XYZ 0 1.25 -15.3
+	#EVENT_START_COND ABS_DELTA=sim/flightmodel2/controls/stabilizer_deflection_degrees > 0.2
+	#CUE_TRIGGER_COND ABS_DELTA=sim/flightmodel2/controls/stabilizer_deflection_degrees >= 0.48
+#END_SOUND_ATTACHMENT
+
+#############################################################################################################
+#                                                     SWITCHING                                             #
+#############################################################################################################
+
+###################################### PARK BRAKE
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/parkbrake/parkbrake_set
+	VEH_XYZ 0 1.45 -15.0
+	EVENT_START_COND sim/flightmodel/controls/parkbrake == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/parkbrake/parkbrake_release
+	VEH_XYZ 0 1.45 -15.0
+	EVENT_START_COND sim/flightmodel/controls/parkbrake == 0
+END_SOUND_ATTACHMENT
+
+###################################### SPEED BRAKE
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/speedbrake/set_speedbrake
+	VEH_XYZ 0 1.45 -15.0
+	EVENT_START_COND sim/cockpit2/controls/speedbrake_ratio == -0.5
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/speedbrake/set_speedbrake
+	VEH_XYZ 0 1.45 -15.0
+	EVENT_START_COND sim/cockpit2/controls/speedbrake_ratio == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/speedbrake/set_speedbrake
+	VEH_XYZ 0 1.45 -15.0
+	EVENT_START_COND sim/cockpit2/controls/speedbrake_ratio == 0.5
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/speedbrake/set_speedbrake
+	VEH_XYZ 0 1.45 -15.0
+	EVENT_START_COND sim/cockpit2/controls/speedbrake_ratio == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/speedbrake/auto_speedbrake
+	VEH_XYZ 0 1.5 -16.0
+	EVENT_START_COND sim/flightmodel/controls/sbrkrat >= 1.1
+END_SOUND_ATTACHMENT
+
+
+# retract auto speedbrake
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/speedbrake/auto_speedbrake_retract
+	VEH_XYZ 0 1.5 -16.0
+	EVENT_START_COND sim/flightmodel/controls/sbrkrat < 1.4
+END_SOUND_ATTACHMENT
+
+
+
+###################################### PUSHBUTTONS
+
+### MASTER CAUTION
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/master_caution
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/push_button/master_caution_accept1 == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/master_caution_out
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/push_button/master_caution_accept1 == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/master_caution
+	VEH_XYZ 1.5 1.45 -15.6
+	EVENT_START_COND laminar/B738/push_button/master_caution_accept2 == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/master_caution_out
+	VEH_XYZ 1.5 1.45 -15.6
+	EVENT_START_COND laminar/B738/push_button/master_caution_accept2 == 0
+END_SOUND_ATTACHMENT
+
+### FIRE CUT OUT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/master_caution
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/push_button/fire_bell_cutout1 == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/master_caution_out
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/push_button/fire_bell_cutout1 == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/master_caution
+	VEH_XYZ 1.5 1.45 -15.6
+	EVENT_START_COND laminar/B738/push_button/fire_bell_cutout2 == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/master_caution_out
+	VEH_XYZ 1.5 1.45 -15.6
+	EVENT_START_COND laminar/B738/push_button/fire_bell_cutout2 == 0
+END_SOUND_ATTACHMENT
+
+###################################### TOGGLES
+
+### APU SWITCHES
+### stock different!
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/APU/APU_switch_clickdown
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/spring_toggle_switch/APU_start_pos == 2
+	END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/APU/APU_switch_release
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/spring_toggle_switch/APU_start_pos == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/switch_off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/spring_toggle_switch/APU_start_pos == 0
+END_SOUND_ATTACHMENT
+
+### BAT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/switch_on
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/electrical/battery_on[0] == 1
+	EVENT_END_COND sim/cockpit2/electrical/battery_on[0] != 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/switch_off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/electrical/battery_on[0] == 0
+
+END_SOUND_ATTACHMENT
+
+### STANDBY POWER
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/standby_power/switch_off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/electrical/battery_on[1] == 1
+	EVENT_END_COND sim/cockpit2/electrical/battery_on[1] != 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/standby_power/switch_on
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/electrical/battery_on[1] == 0
+	EVENT_END_COND sim/cockpit2/electrical/battery_on[1] != 0
+END_SOUND_ATTACHMENT
+
+
+
+###################################### COVERS        
+# laminar/B738/button_switch/cover_position
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/close_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[4] > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/open_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[4] < 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/close_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[5] > 0
+	END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/open_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[5] < 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/close_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[6] > 0
+	END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/open_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[6] < 0
+END_SOUND_ATTACHMENT
+
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/close_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[7] > 0
+	END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/open_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[7] < 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/close_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[8] > 0
+	END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/open_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[8] < 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/close_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[9] > 0
+	END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/open_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/button_switch/cover_position[9] < 0
+END_SOUND_ATTACHMENT
+
+############################## BAT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/open_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/button_switch/cover_position[2] > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/close_cover_and_on
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/button_switch/cover_position[2] < 1
+END_SOUND_ATTACHMENT
+
+##############################  STANDBY POWER
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/close_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/button_switch/cover_position[3] > 0
+	EVENT_END_COND laminar/B738/button_switch/cover_position[3] == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/battery/open_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/button_switch/cover_position[3] < 1
+	EVENT_END_COND laminar/B738/button_switch/cover_position[3] == 1
+END_SOUND_ATTACHMENT
+
+############################################################ SIMPLE SWITCHES
+
+############### DOME LIGHTS
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/cockpit_dome_pos != 0
+END_SOUND_ATTACHMENT 
+
+############### YAW DAMPER
+
+# sim/cockpit2/switches/yaw_damper_on
+# Zibo: laminar/B738/toggle_switch/yaw_dumper_pos
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/yaw_dumper_pos == 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/yaw_dumper_pos == 0
+END_SOUND_ATTACHMENT
+
+###################################### LIGHTS
+
+##################### LANDING LIGHTS
+
+#### retractable
+
+##### left
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/landing_lights_ON
+	VEH_XYZ -0.26 1.7 -16.5
+	EVENT_START_COND DELTA=laminar/B738/switch/land_lights_ret_left_pos > 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/off
+	VEH_XYZ -0.26 1.7 -16.5
+	EVENT_START_COND DELTA=laminar/B738/switch/land_lights_ret_left_pos < 0
+END_SOUND_ATTACHMENT 
+
+##### right
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/landing_lights_ON
+	VEH_XYZ -0.26 1.7 -16.5
+	EVENT_START_COND DELTA=laminar/B738/switch/land_lights_ret_right_pos > 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/off
+	VEH_XYZ -0.26 1.7 -16.5
+	EVENT_START_COND DELTA=laminar/B738/switch/land_lights_ret_right_pos < 0
+END_SOUND_ATTACHMENT 
+
+######### fixed
+
+##### 2
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/landing_lights_ON
+	VEH_XYZ -0.26 1.7 -16.5
+	EVENT_START_COND DELTA=sim/cockpit2/switches/landing_lights_switch[0] > 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/off
+	VEH_XYZ -0.26 1.7 -16.5
+	EVENT_START_COND DELTA=sim/cockpit2/switches/landing_lights_switch[0] < 0
+END_SOUND_ATTACHMENT 
+
+##### 3
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/landing_lights_ON
+	VEH_XYZ -0.26 1.7 -16.5
+	EVENT_START_COND DELTA=sim/cockpit2/switches/landing_lights_switch[3] > 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/landing_lights/off
+	VEH_XYZ -0.26 1.7 -16.5
+	EVENT_START_COND DELTA=sim/cockpit2/switches/landing_lights_switch[3] < 0
+END_SOUND_ATTACHMENT 
+
+
+
+##################### TAXI BEACON etc.
+
+#### BEACON
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ 0.13 1.7 -16.5
+	EVENT_START_COND DELTA=sim/cockpit/electrical/beacon_lights_on > 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0.13 1.7 -16.5
+	EVENT_START_COND DELTA=sim/cockpit/electrical/beacon_lights_on < 0
+END_SOUND_ATTACHMENT 
+
+
+#### WING
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ 0.13 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[0] >= 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0.13 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[0] == 0
+END_SOUND_ATTACHMENT 
+
+#### LOGO
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ 0.13 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[1] >= 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0.13 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[1] == 0
+END_SOUND_ATTACHMENT 
+
+#### RUNWAY TURNOFF
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ -0.13 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[2] >= 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ -0.13 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[2] == 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ -0.13 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[3] >= 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ -0.13 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[3] == 0
+END_SOUND_ATTACHMENT 
+
+#### TAXI
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ -0.1 1.7 -16.5
+	EVENT_START_COND DELTA=sim/cockpit2/switches/generic_lights_switch[4] > 0
+	END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ -0.1 1.7 -16.5
+	EVENT_START_COND DELTA=sim/cockpit2/switches/generic_lights_switch[4] < 0
+END_SOUND_ATTACHMENT 
+
+#### WHEEL WELL
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ 0.2 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[5] >= 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0.2 1.7 -16.5
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[5] == 0
+	EVENT_END_COND sim/cockpit2/switches/generic_lights_switch[5] > 0
+END_SOUND_ATTACHMENT 
+
+#### POSITION
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ 0.2 1.7 -16.5
+	EVENT_START_COND laminar/B738/toggle_switch/position_light_pos < 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/lights
+	VEH_XYZ 0.2 1.7 -16.5
+	EVENT_START_COND laminar/B738/toggle_switch/position_light_pos > 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0.2 1.7 -16.5
+	EVENT_START_COND laminar/B738/toggle_switch/position_light_pos == 0
+END_SOUND_ATTACHMENT 
+
+################################################ TIPPED SWITCHES
+
+
+##################### BLEED
+
+### on
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0.2 1.85 -16.25
+	EVENT_START_COND laminar/B738/toggle_switch/bleed_air_1_pos == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0.2 1.85 -16.25
+	EVENT_START_COND laminar/B738/toggle_switch/bleed_air_2_pos == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0.2 1.85 -16.25
+	EVENT_START_COND laminar/B738/toggle_switch/bleed_air_apu_pos == 1
+END_SOUND_ATTACHMENT
+
+### off
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0.2 1.85 -16.25
+	EVENT_START_COND laminar/B738/toggle_switch/bleed_air_1_pos == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0.2 1.85 -16.25
+	EVENT_START_COND laminar/B738/toggle_switch/bleed_air_2_pos == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0.2 1.85 -16.25
+	EVENT_START_COND laminar/B738/toggle_switch/bleed_air_apu_pos == 0
+END_SOUND_ATTACHMENT
+
+##################### FUEL PUMPS
+
+### crossfeed valve 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/stepACDC
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/knobs/cross_feed_pos == 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/stepACDC
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/knobs/cross_feed_pos == 1
+END_SOUND_ATTACHMENT 
+
+
+## pump noise inside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/hydraulics/fuel_pumps
+	VEH_XYZ 0 1.2 0
+	EVENT_START_COND laminar/b738/fmodpack/fmod_playfuelpumps == 1
+	EVENT_END_COND laminar/b738/fmodpack/fmod_playfuelpumps == 0
+END_SOUND_ATTACHMENT 
+
+## pump noise outside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/fuel_pumps/fuel_pumps
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 0 -1.5 0
+	EVENT_START_COND laminar/b738/fmodpack/fmod_playfuelpumps == 1
+	EVENT_END_COND laminar/b738/fmodpack/fmod_playfuelpumps == 0
+END_SOUND_ATTACHMENT 
+
+## left 1
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_AFT_FUEL1
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_lft1 == 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_lft1 == 0
+END_SOUND_ATTACHMENT 
+
+### left 2
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_AFT_FUEL2
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_lft2 == 1
+END_SOUND_ATTACHMENT 
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_lft2  == 0
+END_SOUND_ATTACHMENT 
+
+## center 1
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_FOR_FUEL1
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_ctr1 == 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_ctr1 == 0
+END_SOUND_ATTACHMENT 
+
+## center 2
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_FOR_FUEL1
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_ctr2 == 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_ctr2 == 0
+END_SOUND_ATTACHMENT 
+
+
+
+## right 1
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_FOR_FUEL1
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_rgt1 == 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_rgt1 == 0
+END_SOUND_ATTACHMENT 
+
+## right 2
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_FOR_FUEL2
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_rgt2 == 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ -0.28 1.76 -16.4
+	EVENT_START_COND laminar/B738/fuel/fuel_tank_pos_rgt2 == 0
+END_SOUND_ATTACHMENT 
+
+
+################################################ ROTARIES and STEPPED
+
+# TRANSPONDER SETTINGS
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6 
+	EVENT_START_COND ABS_DELTA=laminar/B738/knob/transponder_pos >= 1
+END_SOUND_ATTACHMENT
+
+# RHEOSTATS
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/air/aft_cab_temp/rheostat != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/air/aft_cab_temp/rheostat == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/air/cont_cab_temp/rheostat != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/air/cont_cab_temp/rheostat == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/air/fwd_cab_temp/rheostat != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/air/fwd_cab_temp/rheostat == 0
+END_SOUND_ATTACHMENT
+
+# PANELS
+
+### STARTERS
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/eng_start2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/engine/starter2_pos != 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/eng_start1
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/engine/starter1_pos  != 0
+END_SOUND_ATTACHMENT 
+
+### STARTERS springback
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/springback
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=sim/flightmodel2/engines/starter_is_running[0]  < 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/springback
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=sim/flightmodel2/engines/starter_is_running[1]  < 0
+END_SOUND_ATTACHMENT 
+
+
+### AUTOBRAKE
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autobrake/autobrake_pos != 0
+END_SOUND_ATTACHMENT 
+
+### WIPERS
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=sim/cockpit2/switches/wiper_speed >= 1
+	EVENT_END_COND DELTA=sim/cockpit2/switches/wiper_speed == 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=sim/cockpit2/switches/wiper_speed <= -1
+	EVENT_END_COND DELTA=sim/cockpit2/switches/wiper_speed == 0
+END_SOUND_ATTACHMENT 
+
+### NOTCHED WHEEL
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0.1 1.58 -16.45
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/autopilot/bank_angle_mode != 0 
+	END_SOUND_ATTACHMENT 
+
+### EFIS MAP RANGE 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -16.45
+	EVENT_START_COND ABS_DELTA=sim/cockpit/switches/EFIS_map_range_selector != 0 
+END_SOUND_ATTACHMENT 
+
+### EFIS MAP MODE
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -16.45
+	EVENT_START_COND ABS_DELTA=sim/cockpit/switches/EFIS_map_submode != 0 
+END_SOUND_ATTACHMENT 
+
+### RADIO ALTIMETER mode
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 1 1.45 -16.45
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_copilot != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_copilot == 0
+END_SOUND_ATTACHMENT 
+
+
+### VOR mode
+# laminar/B738/EFIS_control/capt/vor1_off_pos
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/vor1_off_pos != 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/vor2_off_pos != 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 1 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/vor1_off_pos != 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 1 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/vor2_off_pos != 0 
+END_SOUND_ATTACHMENT 
+
+
+### bank angle mode
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 1 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/bank_angle_pos  != 0 
+END_SOUND_ATTACHMENT 
+
+
+
+### heading
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0.2 1.5 -16.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/mcp_hdg_dial > 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/autopilot/mcp_hdg_dial == 0 
+END_SOUND_ATTACHMENT 
+
+### speed dial
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch_kts
+	VEH_XYZ 0.2 1.5 -16.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/autopilot/airspeed_dial_kts_mach != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/autopilot/airspeed_dial_kts_mach == 0 
+END_SOUND_ATTACHMENT 
+
+### ALT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0.2 1.5 -16.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/autopilot/altitude_dial_ft >= 100 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/autopilot/altitude_dial_ft == 0 
+END_SOUND_ATTACHMENT 
+
+### crs cpt
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.5 -16.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/hsi_obs_deg_mag_pilot != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/hsi_obs_deg_mag_pilot == 0 
+END_SOUND_ATTACHMENT 
+
+### crs co
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 2 1.5 -16.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav2_obs_deg_mag_copilot != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav2_obs_deg_mag_copilot == 0 
+END_SOUND_ATTACHMENT 
+
+# vertical velocity
+
+#BEGIN_SOUND_ATTACHMENT
+	#EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	#VEH_XYZ 0.2 1.5 -16.6
+	#EVENT_START_COND ABS_DELTA=sim/cockpit2/autopilot/vvi_dial_fpm > 100 
+	#EVENT_END_COND ABS_DELTA=sim/cockpit2/autopilot/vvi_dial_fpm < 100 
+	#EVENT_START_COND laminar/b738/fmodpack/play_vvi_dial_sound != 0
+	#EVENT_END_COND laminar/b738/fmodpack/play_vvi_dial_sound == 0
+#END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0.2 1.5 -16.6
+	EVENT_START_COND ABS_DELTA=laminar/b738/fmodpack/play_vvi_dial_sound != 0 
+	EVENT_END_COND ABS_DELTA=laminar/b738/fmodpack/play_vvi_dial_sound  == 0 
+END_SOUND_ATTACHMENT 
+
+
+# baro qnh
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit/misc/barometer_setting != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit/misc/barometer_setting == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS/baro_sel_in_hg_pilot != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/EFIS/baro_sel_in_hg_pilot == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS/baro_sel_in_hg_copilot != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/EFIS/baro_sel_in_hg_copilot == 0 
+END_SOUND_ATTACHMENT 
+
+# baro settings 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS/baro_set_std_pilot != 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS/baro_set_std_copilot != 0 
+END_SOUND_ATTACHMENT 
+
+# BARO HPA or QNH
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/baro_in_hpa  != 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/baro_in_hpa  != 0 
+END_SOUND_ATTACHMENT 
+
+# minimums / dh
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/cpt/minimums != 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/pfd/dh_pilot != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/pfd/dh_pilot == 0
+END_SOUND_ATTACHMENT 
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/minimums != 0 
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/pfd/dh_copilot != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/pfd/dh_copilot == 0
+END_SOUND_ATTACHMENT 
+
+
+# approaching minimums
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/APP_MINIMUMS
+	VEH_XYZ 0 1.6 -15.6
+	EVENT_START_COND DELTA=laminar/b738/fmodpack/appro_mins > 0
+END_SOUND_ATTACHMENT 
+
+
+# radio altimeter 
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit/misc/radio_altimeter_minimum != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit/misc/radio_altimeter_minimum == 0 
+END_SOUND_ATTACHMENT 
+
+# hsi
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/hsi_obs_deg_mag_pilot != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/hsi_obs_deg_mag_pilot == 0 
+END_SOUND_ATTACHMENT 
+
+# nav2 co
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav2_obs_deg_mag_copilot != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav2_obs_deg_mag_copilot == 0 
+END_SOUND_ATTACHMENT 
+
+# transponder code
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit/radios/transponder_code != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit/radios/transponder_code == 0 
+END_SOUND_ATTACHMENT 
+
+########## communication / navigation
+
+
+# laminar/B738/push_button/switch_freq_nav1
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/push_button/switch_freq_nav1 != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/push_button/switch_freq_nav2 != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/comm/push_button/rtp_L_freq_swap
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/push_button/rtp_L_freq_swap != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/push_button/rtp_R_freq_swap != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/comm/rtp_L/vhf_1_status
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/vhf_1_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/vhf_2_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/vhf_3_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/vhf_1_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/vhf_2_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/vhf_3_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/hf_1_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/hf_2_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/hf_1_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/hf_2_status != 0
+END_SOUND_ATTACHMENT
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/am_status != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/am_status != 0
+END_SOUND_ATTACHMENT
+
+#####
+
+# sim/cockpit2/radios/actuators/audio_volume_mark
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_mark > 1
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_mark == 0
+END_SOUND_ATTACHMENT
+
+# NAV 1 / 2
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/freq_MHz/sel_dial_pos != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/comm/rtp_L/freq_MHz/sel_dial_pos == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/freq_khz/sel_dial_pos != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/comm/rtp_L/freq_khz/sel_dial_pos == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/freq_MHz/sel_dial_pos != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/comm/rtp_R/freq_MHz/sel_dial_pos == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/freq_khz/sel_dial_pos != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/comm/rtp_R/freq_khz/sel_dial_pos == 0 
+END_SOUND_ATTACHMENT 
+
+# standby frequ.
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch5
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav1_standby_frequency_Mhz != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav1_standby_frequency_Mhz == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch5
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav2_standby_frequency_Mhz != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav2_standby_frequency_Mhz == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch5
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav1_standby_frequency_khz != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav1_standby_frequency_khz == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch5
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav2_standby_frequency_khz != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/nav2_standby_frequency_khz == 0 
+END_SOUND_ATTACHMENT 
+
+# nav1 2 volume
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_nav1 != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_nav1 == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_nav2 != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_nav2 == 0 
+END_SOUND_ATTACHMENT 
+
+# HF sens 1
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch5
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_L/hf_sens_ctrl/rheostat != 0 
+	EVENT_END_COND ABS_DELTA=laminar/B738/comm/rtp_L/hf_sens_ctrl/rheostat == 0 
+END_SOUND_ATTACHMENT 
+
+# hf sens 2
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch5
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/comm/rtp_R/hf_sens_ctrl/rheostat != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/comm/rtp_R/hf_sens_ctrl/rheostat == 0
+END_SOUND_ATTACHMENT
+
+# COM 1 / 2 freq
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit/radios/com1_stdby_freq_hz != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit/radios/com1_stdby_freq_hz == 0 
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.2 -16
+	EVENT_START_COND ABS_DELTA=sim/cockpit/radios/com2_stdby_freq_hz != 0 
+	EVENT_END_COND ABS_DELTA=sim/cockpit/radios/com2_stdby_freq_hz == 0 
+END_SOUND_ATTACHMENT
+
+
+
+#############################################################################################################
+#                                                    LANDING GEAR / RUNWAY                                  #
+#############################################################################################################
+
+################## LANDING GEAR HANDLE
+
+### DOWN
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/gear_down
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit/switches/gear_handle_status == 1
+END_SOUND_ATTACHMENT 
+
+### DOWN
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/PRELAND_captain
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/b738/fmodpack/fmod_play_preland == 1
+END_SOUND_ATTACHMENT 
+
+### UP
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/gear_up
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit/switches/gear_handle_status == 0
+END_SOUND_ATTACHMENT 
+
+### OFF 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/gear_off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/controls/gear_handle_down == 0.5
+	END_SOUND_ATTACHMENT 
+
+################## RUNWAY MOVEMENT
+#### etude no. 1 for runway and a plane - inside
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/landing_gear/tires
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/flightmodel/failures/onground_any == 1
+	EVENT_END_COND sim/flightmodel/failures/onground_any == 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/landing_gear/randomized_thuds
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/flightmodel/failures/onground_any == 1
+	EVENT_END_COND sim/flightmodel/failures/onground_any == 0
+END_SOUND_ATTACHMENT 
+
+### outside
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/landing_gear/tires_outside
+	EVENT_ALLOWED_FOR_AI
+	VEH_XYZ 0 -1.45 -13.9
+	EVENT_START_COND sim/flightmodel/failures/onground_any == 1
+	EVENT_END_COND sim/flightmodel/failures/onground_any == 0
+END_SOUND_ATTACHMENT 
+
+
+################## LANDING GEARS
+
+### NOSE gear going up incl wind  / whistle / tire spinning (if going up)
+### NOSE up / down
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/landing_gear/nose/gear_moving_or_down
+	VEH_XYZ 0 1.5 -15.4
+	EVENT_START_COND sim/flightmodel/movingparts/gear1def != 0
+	EVENT_END_COND sim/flightmodel/movingparts/gear1def == 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/landing_gear/nose/gear_wind
+	VEH_XYZ 0 1.5 -15.4
+	EVENT_START_COND sim/flightmodel/movingparts/gear1def != 0
+	EVENT_END_COND sim/flightmodel/movingparts/gear1def == 0
+END_SOUND_ATTACHMENT 
+
+
+### NOSE locked in up position
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/landing_gear/nose/locked_up
+	VEH_XYZ 0 1.5 -15.4
+	EVENT_START_COND sim/flightmodel/movingparts/gear1def == 0
+	EVENT_END_COND sim/flightmodel/movingparts/gear1def != 0
+END_SOUND_ATTACHMENT 
+
+### NOSE locked in down position
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/landing_gear/nose/locked_down
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND sim/flightmodel/movingparts/gear1def == 1
+	EVENT_END_COND sim/flightmodel/movingparts/gear1def != 1
+END_SOUND_ATTACHMENT 
+
+### REAR landing gears locked
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/landing_gear/nose/locked_down
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND sim/flightmodel/movingparts/gear2def == 1
+	EVENT_END_COND sim/flightmodel/movingparts/gear2def != 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/landing_gear/nose/locked_down
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND sim/flightmodel/movingparts/gear3def == 1
+	EVENT_END_COND sim/flightmodel/movingparts/gear3def != 1
+END_SOUND_ATTACHMENT 
+
+#############################################################################################################
+#                                                    SPECIAL FX                                             #
+#############################################################################################################
+
+#################################### airport
+
+############ regional set
+# /model/b737/cockpit/cabin_environment/airport/regional_L
+
+
+### outside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/specialfx/external/airport/regional_L
+	VEH_XYZ -100 0 0
+	EVENT_START_COND laminar/b738/fmodpack/fmod_enable_airport_ambience == 2
+	EVENT_END_COND laminar/b738/fmodpack/fmod_enable_airport_ambience != 2
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/specialfx/external/airport/regional_R
+	VEH_XYZ 100 0 0
+	EVENT_START_COND laminar/b738/fmodpack/fmod_enable_airport_ambience == 2
+	EVENT_END_COND laminar/b738/fmodpack/fmod_enable_airport_ambience != 2
+END_SOUND_ATTACHMENT 
+
+### inside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/airport/regional_L
+	VEH_XYZ -1 1.4 -8
+	EVENT_START_COND laminar/b738/fmodpack/fmod_enable_airport_ambience == 2
+	EVENT_END_COND laminar/b738/fmodpack/fmod_enable_airport_ambience != 2
+END_SOUND_ATTACHMENT 
+
+### inside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/airport/regional_R
+	VEH_XYZ 1 1.4 -8
+	EVENT_START_COND laminar/b738/fmodpack/fmod_enable_airport_ambience == 2
+	EVENT_END_COND laminar/b738/fmodpack/fmod_enable_airport_ambience != 2
+END_SOUND_ATTACHMENT 
+
+
+########## busy set
+
+### outside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/specialfx/external/airport/busy_L
+	VEH_XYZ -100 0 0
+	EVENT_START_COND laminar/b738/fmodpack/fmod_enable_airport_ambience == 3
+	EVENT_END_COND laminar/b738/fmodpack/fmod_enable_airport_ambience != 3
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/specialfx/external/airport/busy_R
+	VEH_XYZ 100 0 0
+	EVENT_START_COND laminar/b738/fmodpack/fmod_enable_airport_ambience == 3
+	EVENT_END_COND laminar/b738/fmodpack/fmod_enable_airport_ambience != 3
+END_SOUND_ATTACHMENT 
+
+### inside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/airport/busy_L
+	VEH_XYZ -1 1.4 -8
+	EVENT_START_COND laminar/b738/fmodpack/fmod_enable_airport_ambience == 3
+	EVENT_END_COND laminar/b738/fmodpack/fmod_enable_airport_ambience != 3
+END_SOUND_ATTACHMENT 
+
+### inside
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/airport/busy_R
+	VEH_XYZ 1 1.4 -8
+	EVENT_START_COND laminar/b738/fmodpack/fmod_enable_airport_ambience == 3
+	EVENT_END_COND laminar/b738/fmodpack/fmod_enable_airport_ambience != 3
+END_SOUND_ATTACHMENT 
+
+#############################################################################################################
+#                                                    WEATHER                                                #
+#############################################################################################################
+
+############################# dynamic TURBULENCE
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/turbulence/turbulence
+	VEH_XYZ -5 1 0
+	EVENT_START_COND sim/weather/wind_turbulence_percent > 0.05
+	CUE_TRIGGER_COND sim/weather/wind_turbulence_percent <= 0.05
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/turbulence/turbulence_0
+	VEH_XYZ -5 1 0
+	EVENT_START_COND sim/weather/turbulence[0] > 0.25
+	CUE_TRIGGER_COND sim/weather/turbulence[0] <= 0.25
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/turbulence/turbulence_g
+	VEH_XYZ -5 1 0
+	EVENT_START_COND ABS_DELTA=sim/flightmodel/forces/g_nrml > 1.5
+	CUE_TRIGGER_COND ABS_DELTA=sim/flightmodel/forces/g_nrml < 1.5
+END_SOUND_ATTACHMENT 
+
+############################# WINDY DAYS ;) ###################################################################
+
+######################### cockpit and cabin
+
+### dynamic wind
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/wind/dynamic_wind
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/flightmodel/position/indicated_airspeed >= 10
+	EVENT_END_COND sim/flightmodel/position/indicated_airspeed < 10
+END_SOUND_ATTACHMENT 
+
+### dynamic wind / noise / outside
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/engines/outside_dynamic_noise
+	VEH_XYZ 0 0 0
+	EVENT_START_COND sim/flightmodel/position/groundspeed >= 34
+	EVENT_END_COND sim/flightmodel/position/groundspeed < 34
+END_SOUND_ATTACHMENT 
+
+######################### outside
+
+### windmilling
+
+### left
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/engines/windmilling
+	VEH_XYZ -4.2 0.42 -4.26
+	EVENT_START_COND sim/weather/wind_speed_kt > 0
+	EVENT_END_COND sim/weather/wind_speed_kt <= 0
+END_SOUND_ATTACHMENT 
+
+### right
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/engines/windmilling
+	VEH_XYZ 4.2 0.42 -4.26
+	EVENT_START_COND sim/weather/wind_speed_kt > 0
+	EVENT_END_COND sim/weather/wind_speed_kt <= 0
+END_SOUND_ATTACHMENT 
+
+
+############################# RAINY DAYS ;) ###################################################################
+
+######################### cockpit and cabin
+
+### dynamic rain
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/weather/rain
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/weather/precipitation_on_aircraft_ratio > 0
+	EVENT_END_COND sim/weather/precipitation_on_aircraft_ratio == 0
+END_SOUND_ATTACHMENT 
+
+# wipers
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/wipers/wiper_normal/wiper_down
+	VEH_XYZ 0 1.35 -16.1
+	EVENT_START_COND DELTA=sim/flightmodel2/misc/wiper_angle_deg[0] < -0.5
+	EVENT_END_COND sim/cockpit2/switches/wiper_speed == 0
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/wipers/wiper_normal/wiper_up
+	VEH_XYZ 0 1.45 -16.1
+	EVENT_START_COND DELTA=sim/flightmodel2/misc/wiper_angle_deg[0] > 0.5
+	EVENT_END_COND sim/cockpit2/switches/wiper_speed == 0
+END_SOUND_ATTACHMENT 
+
+######################### outside
+
+### dynamic rain
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/weather/rain_external
+	VEH_XYZ 8 0 0
+	EVENT_START_COND sim/weather/precipitation_on_aircraft_ratio > 0
+	EVENT_END_COND sim/weather/precipitation_on_aircraft_ratio == 0
+END_SOUND_ATTACHMENT 
+
+########################### DAYS OF THUNDER ####################################################################
+
+
+######################### cockpit and cabin
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/weather/thunder_interior
+	VEH_XYZ 0 0 0
+	EVENT_START_COND sim/weather/thunderstorm_percent > 0.5
+	EVENT_END_COND sim/weather/thunderstorm_percent < 0.5
+END_SOUND_ATTACHMENT 
+
+
+######################### outside
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/external/weather/thunder
+	VEH_XYZ 0 0 0
+	EVENT_START_COND sim/weather/thunderstorm_percent > 0.5	
+	EVENT_END_COND sim/weather/thunderstorm_percent < 0.5
+END_SOUND_ATTACHMENT 
+
+
+
+#############################################################################################################
+#                                                    CABIN ENVIRONMENT                                      #
+#############################################################################################################
+
+###################### dynamic noisefloor
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/noisefloor/noisefloor
+	VEH_XYZ -1.2 1.2 -2.4
+	EVENT_START_COND sim/flightmodel/position/groundspeed >= 34
+	EVENT_END_COND sim/flightmodel/position/groundspeed < 34
+END_SOUND_ATTACHMENT 
+
+###################### ANNOUNCEMENTS 
+
+###################### SEATBELTS ON and OFF (crew)
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/seatbelts_on
+	VEH_XYZ 0 1.7 -16.2
+	EVENT_START_COND laminar/B738/toggle_switch/seatbelt_sign_pos == 2
+END_SOUND_ATTACHMENT
+
+# on and turbulent 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/seatbelts_on_turb
+	VEH_XYZ 0 1.7 -16.2
+	EVENT_START_COND laminar/b738/fmodpack/play_turb_warning == 1
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/seatbelts_off
+	VEH_XYZ 0 1.7 -16.2
+	EVENT_START_COND laminar/B738/toggle_switch/seatbelt_sign_pos == 0
+END_SOUND_ATTACHMENT
+
+
+#################### DTA 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/doorsautomatic
+	VEH_XYZ -1.2 1.2 -2.4
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[4] > 0.5
+	EVENT_END_COND sim/cockpit2/switches/generic_lights_switch[4] == 0
+END_SOUND_ATTACHMENT 
+
+#################### SAFETY VIDEO
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/safetyvideo
+	VEH_XYZ 0 1.25 -10
+	EVENT_START_COND sim/cockpit2/switches/generic_lights_switch[4] > 0.5
+	EVENT_END_COND sim/cockpit2/switches/generic_lights_switch[4] < 0.5
+END_SOUND_ATTACHMENT 
+
+
+
+#################### 80 knots
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/human/80knots
+	VEH_XYZ 0 1.54 -16
+	EVENT_START_COND sim/cockpit2/gauges/indicators/airspeed_kts_pilot >= 80
+END_SOUND_ATTACHMENT 
+
+
+#################### V1
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/V1
+	VEH_XYZ 0 1.54 -16
+	EVENT_START_COND laminar/b738/fmodpack/play_V1 == 1
+	END_SOUND_ATTACHMENT 
+
+#################### prepare for takeoff 
+# crew
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/TO_crew
+	VEH_XYZ 0 1.25 -10
+	EVENT_START_COND laminar/B738/toggle_switch/position_light_pos == 1
+END_SOUND_ATTACHMENT 
+
+# cpt
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/TO_captain
+	VEH_XYZ 0 1.25 -10
+	EVENT_START_COND laminar/B738/toggle_switch/position_light_pos == 1
+END_SOUND_ATTACHMENT 
+
+# after take off crew
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/after_takeoff_crew2
+	VEH_XYZ 0 1.25 -10
+	EVENT_START_COND sim/flightmodel/failures/onground_any == 0
+	EVENT_END_COND sim/flightmodel/failures/onground_any == 1
+END_SOUND_ATTACHMENT
+
+# after landing crew
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/crew/landed_crew
+	VEH_XYZ 0 1.25 -10
+	EVENT_START_COND laminar/b738/fmodpack/play_landed == 1
+END_SOUND_ATTACHMENT
+
+# after landing PAX applause
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/PAX/PAX_applauding
+	VEH_XYZ 0 1.2 -2.4
+	EVENT_START_COND laminar/b738/fmodpack/play_landed == 1
+END_SOUND_ATTACHMENT
+
+#################### PAX chatter
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/PAX/PAX_onboard
+	VEH_XYZ 0 1.2 -2.4
+	EVENT_START_COND laminar/b738/fmodpack/fmod_chatter_on == 1
+	CUE_TRIGGER_COND laminar/b738/fmodpack/fmod_chatter_on == 0
+END_SOUND_ATTACHMENT 
+
+#################### PAX boarding
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/PAX/PAX_boarding
+	VEH_XYZ 0 1.2 -2.4
+	EVENT_START_COND laminar/b738/fmodpack/fmod_pax_boarding_on == 1
+	CUE_TRIGGER_COND laminar/b738/fmodpack/fmod_pax_boarding_on == 0
+END_SOUND_ATTACHMENT 
+
+#################### PAX  variety 1
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/PAX/PAX_bags
+	VEH_XYZ 0 1.2 -10
+	EVENT_START_COND laminar/b738/fmodpack/fmod_pax_boarding_on == 1
+	CUE_TRIGGER_COND laminar/b738/fmodpack/fmod_pax_boarding_on == 0
+END_SOUND_ATTACHMENT
+
+#################### PAX  variety 2
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/cabin_environment/PAX/PAX_bags2
+	VEH_XYZ 0 1.2 2
+	EVENT_START_COND laminar/b738/fmodpack/fmod_pax_boarding_on == 1
+	CUE_TRIGGER_COND laminar/b738/fmodpack/fmod_pax_boarding_on == 0
+END_SOUND_ATTACHMENT
+
+
+#############################################################################################################
+#                                                           EGPWS & WARNINGS & ALERTS                       #
+#############################################################################################################
+
+################### full GPWS test
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/diverse/full_GPWS
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/b738/fmodpack/fmod_gpwstest_long_on == 1
+	EVENT_END_COND laminar/b738/fmodpack/fmod_gpwstest_long_on == 0
+END_SOUND_ATTACHMENT
+
+
+################### FIRE TEST
+
+## ENG 1
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/alerts/fire
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/annunciator/engine1_fire == 1
+	EVENT_END_COND laminar/B738/annunciator/engine1_fire == 0
+END_SOUND_ATTACHMENT
+
+## ENG 2
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/alerts/fire
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/annunciator/engine2_fire == 1
+	EVENT_END_COND laminar/B738/annunciator/engine2_fire == 0
+END_SOUND_ATTACHMENT
+
+
+## APU 
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/alerts/fire
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/annunciator/apu_fire == 1
+	EVENT_END_COND laminar/B738/annunciator/apu_fire == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/BANK_ANGLE
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/roll_electric_deg_pilot > 35
+	EVENT_END_COND sim/cockpit2/gauges/indicators/roll_electric_deg_pilot < 30 
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/BANK_ANGLE
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/roll_electric_deg_pilot < -35
+	EVENT_END_COND sim/cockpit2/gauges/indicators/roll_electric_deg_pilot > -30 
+END_SOUND_ATTACHMENT
+
+
+################### TOO LOW, GEAR
+# /model/b737/cockpit/callouts/GPWS/aural_warning/TOOLOW_GEAR
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/TOOLOW_GEAR
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/b738/fmodpack/fmod_playgearwarn == 1
+	EVENT_END_COND laminar/b738/fmodpack/fmod_playgearwarn == 0
+END_SOUND_ATTACHMENT
+
+
+################## MINIMUMS 
+# laminar/B738/fmod/dh_minimum_copilot
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/MINIMUMS
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/fmod/dh_minimum_copilot > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/MINIMUMS
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/fmod/dh_minimum_pilot > 0
+END_SOUND_ATTACHMENT
+
+################### OVERSPEED
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/alerts/OVERSPEED
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/flightmodel/position/indicated_airspeed >= 340
+	EVENT_END_COND sim/flightmodel/position/indicated_airspeed < 340
+END_SOUND_ATTACHMENT
+
+# altitude alert
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/ALT_ALERT
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/autopilot/rec_alt_alert >= 1
+END_SOUND_ATTACHMENT
+
+
+# AP warning  CPT & FO
+# sim/cockpit/warnings/annunciators/autopilot
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/AP_OFF
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=sim/cockpit/warnings/annunciators/autopilot_disconnect > 0
+	EVENT_END_COND sim/cockpit/warnings/annunciators/autopilot_disconnect == 0
+	EVENT_END_COND DELTA=laminar/B738/switches/autopilot/ap_disconnect < 0
+	
+END_SOUND_ATTACHMENT
+
+#BEGIN_SOUND_ATTACHMENT
+#	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/AP_OFF
+#	VEH_XYZ 0 1.45 -15.6
+#	EVENT_START_COND laminar/B738/annunciator/ap_disconnect2 == 1
+#	EVENT_END_COND laminar/B738/annunciator/ap_disconnect2 == 0
+# END_SOUND_ATTACHMENT
+
+# stick shaker / stall warning test
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/stick_shaker
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/annunciators/stall_warning >= 1
+	EVENT_END_COND sim/cockpit2/annunciators/stall_warning < 1
+END_SOUND_ATTACHMENT
+
+
+# glide slope
+# if custom command sets laminar/b738/fmodpack/fmod_mutegs_on = 1 the G/S alert is muted as long is the command does not toggle it back to 0
+# by default laminar/b738/fmodpack/fmod_mutegs_on = 1
+# correct g/s alert button functionality in cockpit is needed!
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/glideslope
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/b738/fmodpack/below_gs_alert > 0
+	EVENT_END_COND laminar/b738/fmodpack/below_gs_alert  == 0
+END_SOUND_ATTACHMENT
+
+# button
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small
+	VEH_XYZ 0 1.25 -16.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/push_button/below_gs_pilot_pos > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small
+	VEH_XYZ 0 1.25 -16.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/push_button/below_gs_copilot_pos > 0
+END_SOUND_ATTACHMENT
+
+# pull up
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/aural_warning/pull_up
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/annunciators/GPWS >= 1
+	EVENT_END_COND sim/cockpit2/annunciators/GPWS < 1
+END_SOUND_ATTACHMENT
+
+# T/O warning
+
+### added by Zibo (?)
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/alerts/TO
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/b738/fmodpack/horn_alert == 1
+	EVENT_END_COND laminar/b738/fmodpack/horn_alert == 0
+END_SOUND_ATTACHMENT
+
+
+# altitude callouts
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/2500
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 2500.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 2300.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/1000
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 1010.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 800.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/500
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 510.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 420.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/400
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 410.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 320.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/300
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 310.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 220.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/200
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 210.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 120.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/100
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 110.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 60.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/50
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 55.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 42.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/40
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 45.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 32.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/30
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 35.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 22.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/20
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 25.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 12.0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/callouts/GPWS/altitude/10
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 15.0
+	EVENT_END_COND sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot <= 3.0
+END_SOUND_ATTACHMENT
+
+################################################ PUSHBUTTONS ########################################
+# MCP / glareshield
+
+# MAP options
+# captain
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/push_button/arpt != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/push_button/data != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/push_button/pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/push_button/sta != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/push_button/terr != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/push_button/wpt != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ -0.2 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/capt/push_button/wxr != 0
+END_SOUND_ATTACHMENT
+
+# fo
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/push_button/arpt != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/push_button/data != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/push_button/pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/push_button/sta != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/push_button/terr != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/push_button/wpt != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0.1 1.6 -16
+	EVENT_START_COND ABS_DELTA=laminar/B738/EFIS_control/fo/push_button/wxr != 0
+END_SOUND_ATTACHMENT
+
+
+
+# AP, CWS, FL CH, ...
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/cmd_a_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/cmd_b_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/cws_a_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/cws_b_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/n1_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/lvl_chg_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/hdg_sel_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/speed_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/app_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/vorloc_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/lnav_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/vnav_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/alt_hld_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/vs_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 1 1.45 -16.1
+	EVENT_START_COND ABS_DELTA=laminar/B738/autopilot/disconnect_pos != 0
+END_SOUND_ATTACHMENT
+
+############################################# SMALL TOGGLES / TIPPED #################################
+
+##################################### MAIN PANEL #######################################################
+
+##### N1 SOURCE
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/n1_set_source != 0
+END_SOUND_ATTACHMENT
+
+
+# laminar/B738/toggle_switch/spd_ref (step)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/spd_ref != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/spd_ref_adjust (wheel)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/spd_ref_adjust != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/toggle_switch/spd_ref_adjust == 0
+END_SOUND_ATTACHMENT
+
+
+# laminar/B738/toggle_switch/n1_set_adjust (wheel)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/n1_set_adjust != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/toggle_switch/n1_set_adjust == 0
+END_SOUND_ATTACHMENT
+
+
+# laminar/B738/toggle_switch/fuel_flow_pos (toggle)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/fuel_flow_pos != 0
+END_SOUND_ATTACHMENT
+
+##### DU ENG/SYS
+# laminar/B738/systems/lowerDU_page (pushbutton)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/systems/lowerDU_page != 0
+END_SOUND_ATTACHMENT
+
+##### LOWER  / MAIN DU ROTARIES
+
+# laminar/B738/toggle_switch/lower_du_capt
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/lower_du_capt != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/main_pnl_du_capt
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/main_pnl_du_capt != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/lower_du_fo
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 1 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/lower_du_fo != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/main_pnl_du_fo
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 1 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/main_pnl_du_fo != 0
+END_SOUND_ATTACHMENT
+
+##################################### LOWER #######################################################
+
+##### TEST SWITCHES
+
+# AP DISC TEST
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/smaller_toggle
+	VEH_XYZ 0 1.35 -16.1
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/ap_discon_test1 != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/smaller_toggle
+	VEH_XYZ 1 1.35 -16.1
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/ap_discon_test2 != 0
+END_SOUND_ATTACHMENT
+
+# BRIGHTNESS TEST
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.35 -16.1
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/bright_test != 0
+END_SOUND_ATTACHMENT
+
+
+########### AILERON TRIM
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/smaller_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/flt_ctrls/aileron_trim/switch_pos > 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/flt_ctrls/aileron_trim/switch_pos == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/smaller_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/flt_ctrls/aileron_trim/switch_pos < 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/flt_ctrls/aileron_trim/switch_pos == 0
+END_SOUND_ATTACHMENT
+
+########### FLIGHT DECK DOOR
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/flt_dk_door != 0
+END_SOUND_ATTACHMENT
+
+########### RUDDER TRIM
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/flt_dk_door != 0
+END_SOUND_ATTACHMENT
+
+########### COM / NAV CONTROLS
+
+
+# wheels
+
+# volumes
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_com1 != 0
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_com1 == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_com2 != 0
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_volume_com2 == 0
+END_SOUND_ATTACHMENT
+
+
+
+# push buttons
+
+# AUDIO MARKER
+
+### marker value jumps up when apu bus on POWER
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/audio/indicators/audio_marker_enabled > 0.8
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/audio/indicators/audio_marker_enabled == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_selection_com1 != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_selection_com2 != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_selection_nav1 != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/radios/actuators/audio_selection_nav2 != 0
+END_SOUND_ATTACHMENT
+
+##################################### FIRE TEST
+
+# toggles 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/fire_test != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/extinguisher_circuit_test != 0
+END_SOUND_ATTACHMENT
+
+##################################### MIXTURE
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/mixture
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/engine/mixture_ratio1 != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/engine/mixture_ratio1 == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/mixture_click
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/engine/mixture_ratio1 == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/mixture_100
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND laminar/B738/engine/mixture_ratio1 == 1
+END_SOUND_ATTACHMENT
+
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/mixture
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/engine/mixture_ratio2 != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/engine/mixture_ratio2 == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/mixture_click
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/engine/mixture_ratio2 == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/levers/mixture_100
+	VEH_XYZ 0 1.25 -15.6
+	EVENT_START_COND laminar/B738/engine/mixture_ratio2 == 1
+END_SOUND_ATTACHMENT
+
+
+##################################### OVERHEAD #######################################################
+
+########## ALT HORN cutout
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small
+	VEH_XYZ 1.5 1.45 -16.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/push_button/alt_horn_cutout_pos != 0
+END_SOUND_ATTACHMENT
+
+######### GPU 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_GPU_DOWN
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/electrical/gpu_pos == 1
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_GPU_UP
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/electrical/gpu_pos == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/standby_power/switch_off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/electrical/gpu_pos == -1
+END_SOUND_ATTACHMENT
+
+######## GEN BUS SWITCHES (tip)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/electrical/apu_gen1_pos > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/electrical/apu_gen1_pos < 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/electrical/apu_gen2_pos > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/electrical/apu_gen2_pos < 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/electrical/gen1_pos > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/electrical/gen1_pos < 0
+END_SOUND_ATTACHMENT
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/electrical/gen2_pos > 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/electrical/gen2_pos < 0
+END_SOUND_ATTACHMENT
+
+
+######## ELT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/standby_power/switch_on
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/elt_on != 0
+END_SOUND_ATTACHMENT
+
+################################# disconnect_pos (stubs)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/standby_power/switch_on
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/one_way_switch/drive_disconnect1_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/standby_power/switch_on
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/one_way_switch/drive_disconnect2_pos != 0
+END_SOUND_ATTACHMENT
+
+# passenger oxygen
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/standby_power/switch_on
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/one_way_switch/pax_oxy_pos != 0
+END_SOUND_ATTACHMENT
+
+################################# IRS
+#laminar/B738/toggle_switch/irs_left
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/irs_left != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/irs_right != 0
+END_SOUND_ATTACHMENT
+
+################################# DISPLAY SOURCE
+# laminar/B738/toggle_switch/dspl_source
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/dspl_source != 0
+END_SOUND_ATTACHMENT
+
+############################## TOGGLES NAV SOURCE etc
+# laminar/B738/toggle_switch/vhf_nav_source (tipped)
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/vhf_nav_source != 0
+	END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/irs_source (tipped)
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/irs_source != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/fmc_source (tiny)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/fmc_source != 0
+END_SOUND_ATTACHMENT
+
+
+# laminar/B738/toggle_switch/dspl_ctrl_pnl (tipped -1 to 1)
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/dspl_ctrl_pnl != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/dspl_source (step)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/dspl_source != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/irs_sys_dspl (step small)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/irs_sys_dspl != 0
+END_SOUND_ATTACHMENT
+
+# laminar/B738/toggle_switch/irs_dspl_sel
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step_small
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/irs_dspl_sel != 0
+END_SOUND_ATTACHMENT
+
+
+# laminar/B738/toggle_switch/service_interphone (tiny)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/service_interphone != 0
+END_SOUND_ATTACHMENT
+
+################################# EEC
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/diverse/small_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/button_switch/cover_position[0] != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/diverse/small_cover
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/button_switch/cover_position[1] != 0
+END_SOUND_ATTACHMENT
+
+################################# HEAT
+
+################## WING
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/wing_heat_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/wing_heat_pos < 0
+END_SOUND_ATTACHMENT
+
+##################  PITOT
+### ALTERNATES FOR STOCK INSERT HERE <<<<
+
+
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/capt_probes_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/capt_probes_pos < 0
+END_SOUND_ATTACHMENT
+
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/fo_probes_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/fo_probes_pos < 0
+END_SOUND_ATTACHMENT
+
+########### ENG HEAT (TIPPED)
+### 1
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/ice/eng1_heat_pos == 1
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/ice/eng1_heat_pos == 0
+END_SOUND_ATTACHMENT
+
+########### ENG HEAT
+### 2
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/ice/eng2_heat_pos == 1
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/ice/eng2_heat_pos == 0
+END_SOUND_ATTACHMENT
+
+
+############# WINDOW HEAT
+
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/window_heat_l_fwd_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/window_heat_l_fwd_pos < 0
+END_SOUND_ATTACHMENT
+
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/window_heat_l_side_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/window_heat_l_side_pos < 0
+END_SOUND_ATTACHMENT
+
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/window_heat_r_fwd_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/window_heat_r_fwd_pos < 0
+END_SOUND_ATTACHMENT
+
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/window_heat_r_side_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/ice/window_heat_r_side_pos < 0
+END_SOUND_ATTACHMENT
+
+### TEST SWITCH (TINY)
+
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/window_ovht_test != 0
+END_SOUND_ATTACHMENT
+
+############ HYDRO PUMPS
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/hydro_pumps1_pos == 1
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/hydro_pumps1_pos == 0
+END_SOUND_ATTACHMENT
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/hydro_pumps2_pos == 1
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/hydro_pumps2_pos == 0
+END_SOUND_ATTACHMENT
+
+############ ELEC HYD PUMPS
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/electric_hydro_pumps1_pos == 1
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/electric_hydro_pumps1_pos == 0
+END_SOUND_ATTACHMENT
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/electric_hydro_pumps2_pos == 1
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/electric_hydro_pumps2_pos == 0
+END_SOUND_ATTACHMENT
+
+########################  TRIM AIR (TINY)
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/air/trim_air_pos != 0
+END_SOUND_ATTACHMENT
+
+########################  RECIRCULATION (TINY)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/air/l_recirc_fan_pos != 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/air/r_recirc_fan_pos != 0
+END_SOUND_ATTACHMENT
+
+####################### PACK SWITCHES (TIPPED)
+
+# laminar/B738/air/l_pack_pos
+# laminar/B738/air/r_pack_pos
+# laminar/B738/air/isolation_valve_pos
+# laminar/B738/push_button/trip_reset
+
+# trip reset 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/pushbuttons/small2
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/push_button/trip_reset > 0
+	END_SOUND_ATTACHMENT
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_packs
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/air/l_pack_pos > 0
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/air/l_pack_pos < 0
+END_SOUND_ATTACHMENT
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip_packs
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/air/r_pack_pos > 0
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/air/r_pack_pos < 0
+END_SOUND_ATTACHMENT
+
+# on
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/tip
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/air/isolation_valve_pos > 0
+END_SOUND_ATTACHMENT
+
+# off
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/tip_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/air/isolation_valve_pos < 0
+END_SOUND_ATTACHMENT
+
+#### AIR FLOW
+
+# laminar/B738/toggle_switch/air_valve_manual (tiny)
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/air_valve_manual != 0
+END_SOUND_ATTACHMENT
+
+
+# laminar/B738/toggle_switch/air_valve_ctrl (step)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/air_valve_ctrl != 0
+END_SOUND_ATTACHMENT 
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/step
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/air_temp_source != 0
+END_SOUND_ATTACHMENT 
+
+#### PRESSURIZATION
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit/pressure/max_allowable_altitude != 0
+	EVENT_END_COND ABS_DELTA=sim/cockpit/pressure/max_allowable_altitude == 0
+END_SOUND_ATTACHMENT
+
+
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/pressurization/knobs/landing_alt != 0
+	EVENT_END_COND ABS_DELTA=laminar/B738/pressurization/knobs/landing_alt == 0
+END_SOUND_ATTACHMENT
+
+####################### POWER TEST
+
+# laminar/B738/knob/ac_power (step)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/stepACDC
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/knob/ac_power != 0
+END_SOUND_ATTACHMENT 
+
+# laminar/B738/knob/dc_power
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/stepACDC
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/knob/dc_power != 0
+END_SOUND_ATTACHMENT 
+
+
+####################### ALT FLAPS
+# laminar/B738/toggle_switch/alt_flaps_ctrl (tiny)
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/alt_flaps_ctrl != 0
+END_SOUND_ATTACHMENT 
+
+###################### ENG START SOURCE
+# laminar/B738/toggle_switch/eng_start_source
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/domelight
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=laminar/B738/toggle_switch/eng_start_source != 0
+END_SOUND_ATTACHMENT 
+
+
+############ 28-05
+
+
+######################## COOL SUPPL.
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/eq_cool_supply > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/eq_cool_supply < 0
+END_SOUND_ATTACHMENT
+
+########################  COOL EXH..
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/eq_cool_exhaust > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/eq_cool_exhaust < 0
+END_SOUND_ATTACHMENT
+
+######################## CAB UTIL.
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle2
+	VEH_XYZ 0.1 1.8 -16.1
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/cab_util_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0.1 1.8 -16.1
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/cab_util_pos < 0
+END_SOUND_ATTACHMENT
+
+########################  IFE PASSGN.
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle2
+	VEH_XYZ 0.1 1.8 -16.1
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/ife_pass_seat_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0.1 1.8 -16.1
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/ife_pass_seat_pos < 0
+END_SOUND_ATTACHMENT
+
+###################### SEATBELT SIGNS
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/seatbelts_smoking
+	VEH_XYZ 0 1.7 -16.2
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/seatbelt_sign_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.7 -16.2
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/seatbelt_sign_pos < 0
+END_SOUND_ATTACHMENT
+
+### BELL 1
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/bells/seatbelts_single
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/seatbelt_sign_pos == 1
+END_SOUND_ATTACHMENT
+
+### BELL 2 
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/bells/seatbelts_single
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/seatbelt_sign_pos == 2
+END_SOUND_ATTACHMENT
+
+###################### NO SMOKING SIGNS
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/seatbelts_smoking
+	VEH_XYZ 0 1.7 -16.2
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/no_smoking_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.7 -16.2
+	EVENT_START_COND DELTA=laminar/B738/toggle_switch/no_smoking_pos < 0
+END_SOUND_ATTACHMENT
+
+### BELL 1
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/bells/seatbelts_single
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/no_smoking_pos == 1
+END_SOUND_ATTACHMENT
+
+### BELL 2 
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/announcements/bells/seatbelts_single
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND laminar/B738/toggle_switch/no_smoking_pos == 2
+END_SOUND_ATTACHMENT
+
+##################################### MCP #######################################################
+
+### FD
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/autopilot/flight_director_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/autopilot/flight_director_pos < 0
+END_SOUND_ATTACHMENT
+
+### FD FO
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/autopilot/flight_director_fo_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/autopilot/flight_director_fo_pos < 0
+END_SOUND_ATTACHMENT
+
+
+
+### AT
+### ON
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/small_toggle
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/autopilot/autothrottle_arm_pos > 0
+END_SOUND_ATTACHMENT
+
+### OFF
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/small_toggles/off
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND DELTA=laminar/B738/autopilot/autothrottle_arm_pos < 0
+END_SOUND_ATTACHMENT
+
+
+#############################################################################################################
+#                                                    FMC                                                    #
+#############################################################################################################
+
+# FMC brightness level
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/switches/rotaries/notch
+	VEH_XYZ 0 1.45 -15.6
+	EVENT_START_COND ABS_DELTA=sim/cockpit2/switches/instrument_brightness_ratio[10] != 0
+	EVENT_END_COND ABS_DELTA=sim/cockpit2/switches/instrument_brightness_ratio[10] == 0
+END_SOUND_ATTACHMENT
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/FMC/FMC_message
+	VEH_XYZ -0.23 1.16 -16.7
+	EVENT_START_COND laminar/B738/fmod/fms_message == 1
+END_SOUND_ATTACHMENT 
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/FMC/buttons/keypad
+	VEH_XYZ -0.23 1.16 -16.7
+	EVENT_START_COND laminar/B738/fmod/fms_key == 1
+END_SOUND_ATTACHMENT 
+
+# laminar/B738/indicators/fms_exec_light_pilot
+# test sound to be replaced
+
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /model/b737/cockpit/FMC/exec
+	VEH_XYZ -0.23 1.16 -16.7
+	EVENT_START_COND DELTA=laminar/B738/indicators/fms_exec_light_pilot > 0
+END_SOUND_ATTACHMENT 
+
+#############################################################################################################
+#                                            (C) 2017 by audiobirdxp / o. schmidt                           #
+#                                            audiobirdxp@gmail.com                                          #
+#############################################################################################################
+#############################################################################################################
+#                                                    V1 ZIBO'S MODIFIED )                                   #
+#                                                    06-07-17  /  22:00                                     #
+#############################################################################################################
+
+#############################################################################################################
+#                                                    CHANGE LOG (starting BETA 3.1)                         #
+#############################################################################################################
+
+# 6-3-17
+# adjusted fan engine volumes inside
+# adjusted distance sound and doppler effects
+# "repaired" AP OFF warning
+# removed slow turn rate trimwheel sound (dataref delivering rate change needed)
+# adjusted engine inside drop off rate; heads up: will set up mixer snapshot for wingbox and cockpit
+# assigned individuel toggle sounds with actual recording from real toggle, replaced most doubles
+# adjusted switch volumes
+# improved dynamic rain to react to rain amount and speed on windshield
+# changed outside volume of APU
+# fixed location of right engine start
+# improved change of engine timbre according to airspeed
+
+# 6-3-17 Beta 3.2
+# added engine shutdown inside & outside
+# changed play logic for engine shutdown and startup
+# shutdown is cancelled if you turn the engine back on while shutdown is playing
+# starup is canncelled if the engine fails or you turn it off during start up
+# corrected a couple of sound positions
+# improved thrust reverser hydraulic opening and closing sound outside (although probably no one will ever get to listen to it :D)
+
+# 6-3-17 Beta 3.3
+# completely remodelled packs / bleed / recirculation with fade in / out
+# change eng starter switches
+# repaired engine startup
+# modified flap lever sound
+# corrected attachment of fuel pump sounds to actually play when fuel pumps are on (not together with hydraulics)
+# adjusted volume levels
+# added doppler effect to engines (close and far)
+# tweaked roll sound for low speeds 
+# connecting ground power now correctly toggles equipment cooling fans (like in sound3d version)
+# GPU now also toggles battery sound
+# change seat belt / smoking chimes to single chime (first high, then low)
+# removed sound from non-rasterized potentiometers (brightness dials)
+
+# 6-3-17 Beta 3.4
+# improved (?) taxi and takeoff roll
+# exchange rain external and more dynamic rain
+# fixed bug in right external engine start
+
+#6-4-17 Beta 3.5
+# adjusted n1s 
+# only dongs, no dings on seatbelts / smoking
+# adjusted roll
+# adjusted landing thud (basic adjustments, more sophistication will follow)
+# tried new ways to work around limitations of in flight warnings (AP, glideslope); AP now just does it's 3 whoops once.
+# re-mixed altitude callouts to reflect massive volume in cockpit
+# AGAIN adjusted recirculation / pack sounds and volume and change some sounds
+# used unfiltered hydraulics sound for wheel well outside (tell me if that's better)
+# new flaps lever / flap up different
+
+#6-4-17 Beta 3.6.
+# new impact sound system
+# adjusted gyro "woodpecker" vibrator position (instr panel)
+# modified eng startup inside & outside (long term goal is to simulate the complete start up so it can be cancelled or stalled at any time)
+# modified "heavy rain on windshield at higher airspeeds" volume (was too loud)
+
+#7-4-17 Beta 3.7.
+# added minimums callout co & cpt
+# changed ALL vol levels to gain more headroom e.g. for landing gear and flap sounds
+# reworked landing (not final at all) and rolling orchestration
+# added speedbrake retraction servo (after autodeploy)
+
+#8-4-17 Beta 3.8.
+# changed and remodelled flap servo flaps_motor / changed audibility in cockpit
+# added filtering of airport sounds inside cockpit
+# adjusted audibility of fan whine in cockpit
+# adjusted gooling and bass inside
+# replaced relay sounds
+
+#8-4-17 Beta 3.8A
+# changed and remodelled flap servo flaps_motor / changed audibility in cockpit
+# adjusted audibility of fan whine in cockpit
+# adjusted gooling and bass inside
+# added dynamic turbulence (and tested it) for wind turbulence and g forces
+# resampled overspeed clacker
+# again adjusted roll sounds
+# adjusted impact, new impact set for main gears
+# adjusted roll volume and made it dependend on main or nose gear rolling (main gear only is quieter in cockpit)
+# fixed minor bug that would play outside bleed air with no duct pressure
+# liftoff sound
+# added all buttons on middle console (tried to avoid double tapping when swapping frequency, could only mask it. missing refs)
+
+
+#8-4-17 Beta 3.9
+# remodelled exterior sounds to change dynamically depending on airspeed
+# remodelled exterior mid and long distance - outside engines now blend nicely into each other, nice for filming approaches and take offs
+# added thunder! thunder! thunderstruck! (not too prominent in flight)
+
+#94-17 Beta 4
+# added position dependend mixing of engine noises (cockpit - wingbox in front or center of engine - behind engine)
+# gyro vibrator / avionics cooling are now toggled by either APU gens, GPU on or standby power on (or any of them on)
+# equipment cooling hiss can be heard with main battery online OR a GPU connected (available light on - this is standard on loading the aircraft)
+# corrected engine positions; readjusted volume to compensate
+# fixed serious bug that no one noticed (outside tires were playing on the inside which was the reason I had trouble balancing the inside roll and rattle)
+
+#11-4-17 Beta 4.1
+# implemented custom logic by Jake / zibo (thanks guys!!!) for pack and AC/gyro activation
+# added or adjusted relays / sounds for main battery on / all generator power off
+# adopted new AC logic in FMOD; PACKS now generally soft fade in and out if airflow into cockpit changes
+# new datarefs allow to remove gaps ac cooling / gyro when switching generator sources
+# added APP MINIMUMS callout (new dataref)
+# started working on AI sounds (so stock b738 will have sounds if you use it as AI aircraft - not implemented in this release)
+# added workaround script to mute VS dial when landing with 2 autopilots (that's the clicking noise you can hear shortly before touch down when doing ILS autolanding - the AP changes 2 datarefs. One should only be changed when the user moves the wheel, but it is also triggered during autoland)
+# added event for VS wheel to match with VS dial muting ref
+# less dashboard and panel rattle in passengers cabin when rolling
+
+#11-4-17 Beta 4.1A
+# fixed (probably) stupid VS dial clacker on TOD / autoland.
+# added FMC message sound (on request)
+
+
+#13-4-17 Beta 4.2
+# added new alt horn cutout in Zibo 2.75+
+# little tweaks (toggles, vol levels)
+
+# updated / correct fmodlogic script (standby power / eng generators for ac/gyro)
+
+#13-4-17 Beta 4.3
+# more tweaks for engines
+# added simulated engine start which reacts to mixture settings or failures (for both engines, inside only)
+# roll improvements
+# wrote experimental scripts to add custom commands which can be bound to buttons or keys via settings menu:
+# (toggle woodpecker, toggle boarding noise, enable or disable all crew announcements)
+# changend ref name acgyroplay => laminar/b738/fmodpack/ac_established
+
+#16-4-17 Beta 4.4
+# custom command to toggle PAX chatter on / off
+# custom dataref to toggle after-landing announcements (crew)
+# added V1 script and callout
+
+#17-4-17 RC1 BETA
+
+# modified g/s muting logic (alert is off by default can be toggle on/off with button)
+# modified (again) rolling. Only with nose wheel on ground you get the full smorgasbord of noises.
+# modified lift-off sound logic
+# modified after landing announcement & levels
+# added after take-off announcements (crew)
+# changed trigger for "prepare for take off" announcements (now triggered by pos lights going to strobe&steady)
+
+#18-6-17 BETA RC1 b2
+# incorporated changes in new 738X 2.79 version: g/s mute / FMC buttons have sound / EXEC sound added
+# added sound for new buttons (G/S co & cpt)
+# added crossfeed valve sound
+# added alt horn cutout button sound
+# added sound for fuel mixture levers full up
+# added correct springback sound for starter switches (previously springback would be played whenever switch was moved to auto)
+# added command to toggle airport ambience between set 1, set 2 and OFF (incl. changes in fmodlogic.lua)
+
+#18-6-17 BETA RC1 b3 
+# minor change to liftoff sound / after takeoff message (could be triggered by faults in the scenery)
+# corrected minor bugs in AC established sound control
+# changed volume level of gooling inside and whine outside
+
+#22-6-17 BETA RC1 b4 / b5
+# added sound to FMC brightness dial
+# added version number for new read-out functionality
+# started work on volume controls
+# upped volume of fuel pumps in cockpit (on request)
+# added more randomized thumps for slow to medium rolling speeds (on request)
+# modified impact triggers to (hopefully) circumvent the fact that gear deflection refs are frozen by XP during playback
+# added command to toggle a 10 db volume reduction (if you want to lower all internal sounds as long as the ducking effect is toggled on)
+# added command to step through 10 levels of internal engine volume (f you want to tune engine volume only)
+# added command to step through 10 levels of internal engine volume for engine start and stop (f you want to tune engine start / stop volume only)
+# modified sound banks to enable volume control
+# added external fuel pump sounds
+# improved 80 knots trigger (Zibo)
+# cleaned code, added new audio options to FMS (Zibo)
+# fixed bank angle mode selector sound
+# added TOO LOW GEAR warning (on request, thanks Ferdiaz, jake)
+
+#26-6-17 BETA RC1 b6
+# wrote new commands / new custom options gyro volume and AC fans volume (recirculation and packs)
+# wrote new commands / new custom options roll volume (overall rolling sound intensity) and intensity of extra bumps when taxiing (for bumpy airports of if you just happen to like thuds).
+# modified banks to allow volume control
+# tuned taxi thuds (more sub-bass)
+
+#28-6-2017 BETA RC1 B7
+# fixed 80 knots callout (again, because I'm really stupid)
+# muted MCP speed dial when autopilot is dialing
+# added volume commands for PAX chatter and boarding
+# added toggle command to enable PAX applause on landing
+# added PAX applause
+# correct after takeoff file (last version did not play intended recording)
+# adopted landing sounds to new landing detection code (by Zibo)
+# changed safety video to clearer recording
+# re-balanced all announcement and added dampening filter in cockpit vs cabin
+# max packs volume a tiny bit louder
+# cleaned up a lot of warnings
+
+#30-6-2017 RC1 B8
+# converted complete project to 5.1
+# increased audio quality (less data compression)
+# adjusted positioning of some events for 5.1 (still testing stage)
+# adjusted engine start up volume (spool down is exponentially longer than spool up - avoids bass heavy spool being played too long / intensely when shutting down)
+# adjusted wind speed <-> wind volume ratio (so as not to completely drown out most other noises but still make more audible difference from medium to high speeds)
+# adjusted PAX cabin wind
+# added MCP / glareshield buttons (WXR, ...)
+# added dynamic outside wind noise to enhance immersion
+# engine vol can be set slightly higher
+# a little less loss of fan noise with higher airspeeds 
+# coded custom commands for wind volume (main and gear down), changed sound banks accordingly
+
+#1-7-2017 RC1 b9 
+# added dynamic 3D engine start outside (like inside, but sounds different depending on where you; also reacts properly to fuel mixture and failure)
+# a lot of minor changes, mainly positioning and leveling due to shifts in volume that result from 5.1. support
+# different filtering for flaps motor (top end hydraulics will be more audible from wingbox, as well as the locking/unlocking)
+# new "full power" rumble in PAX cabin when going TO/GA (or increasing N1 rapidly) on the ground
+# some ambience additions (mainly PAX boarding)
+# longer after take off announcement
+# all announcements triggered by taxiing and before takeoff announcements disabled when in air
+# adjustments to airport sets; repaired FMC options not corresponding to airport set being played.
+# improved stereo ambiences (airport) outside. Now it is full stereo again independent of camera position.
+# new set of capt announcements (kindly provided by JDS aka cloudy box - go subscribe his channel right now :D)
+
+#8-11-2017 RC1 V1
+
+#### added sounds
+# added rotary sounds for minimums (actually DH when radio alt height is selected)
+# added more boarding variety
+# added more thunder / single claps
+# added pre landing announcement (capt to crew), roughly 10 nm before destination
+
+# added fmod pack for AI aircraft (use standard 737-800!) with external sounds (btw they don't change with N1, XP11 seems not to actually simulate this)
+
+
+#### changed sounds
+# about 1 gazillion changes and distance / N1 / speed / angle controlled  filtering to all components of the exterior engines to make outside more immersive and realistic
+# tried to compensate for difference between internal XP11 radio altimeter height and displayed radio alt height to get correct altitude callouts
+
+#### landing and rolling
+
+# fixed landing impact behaviour (really, really annoying due to the way XP uses the refs I need)
+# landing impacts and ground impacts made completely new due to refs not working as they should
+# made impact sounds work on sloped runways (because on some airports or taxi ways according to the refs the plane practically takes off and bumps down again)
+# replay mode landing fault has been worked around. Special set of touch down events just for replay mode implemented.
+
+# again tuned rolling sounds
+
+# adjusted runway rolling sounds (some volumes depended on a now faulty xp11 dataref)
+
+#### volumes
+
+# reworked the customizable volumes. Now 5 is the normal setting for everything (except for gyro and extra bumps). All volumes on 5 means you now get a more or less realistic set of volumes. Anything higher boosts that particular sound source, anything lower cuts volume. Engines on 4 would be more realistic but most people like them louder.
+# re-adjusted engine sounds / flap wind / gear wind / spoiler wind / ... in wing view - behind wing box
+# PAX boarding sounds now get dimmed with increasing speed
+
+
+#### announcements and announcement logic
+
+# added new captain announcements
+# wrote / changed scripts to detect unwanted landing announcement by scenery glitch (esp with sloped runways and long taxi ways)
+# muted landing announcements when in air (subdues landing announcement playing in replays while plane is approaching runway)
+# muted seatbelt announcements when on ground
+
+# "doors to automatic", safety briefing and safety video are now only played if the "PAX BOARDING" option is ON. This way you can turn on taxi lights after landing without those announcements playing.
+
+# INOP at the moment: seatbelts on while in turbulence plays turbulence announcement. This sound is temporary until replaced. Courtesy of this sound: https://www.youtube.com/watch?v=qUWQxKcFcCw (k0llege)
+# (missing / non-functioning dataref)
+
+
+#### new or modified options
+
+# added new custom commands (implementation in FMC menu later by Zibo): Mute trimwheel when AP is trimming On/Off | Control overall inside volume (XP11 "interior" volume)
+# IMPORTANT: When this pack releases, the new volume functions may not yet be implemented IN THE FMC (will be done by Zibo). 
+
+# added custom command to set airport volume (inside and outside simultaneously)
+# In order to hear the airport ambience inside and outside, you MUST bind a key to the new command (find it under settings > keyboard > search for "fmod").
+# If you want to, you can make the airport ambience much louder than before. 5 is normal (as with all volumes)
+
+# added custom command to play the long GPWS self-test
+# IMPORTANT: When this pack releases, the new volume functions may not yet be implemented IN THE FMC (will be done by Zibo). 
+# In order to hear the self-test, you MUST bind a key to the new command (find it under settings > keyboard > search for "fmod").
+
+
+
+
+
+########### that's it. there's nothing more to see here. ##########################
+
